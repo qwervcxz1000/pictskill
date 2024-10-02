@@ -126,7 +126,7 @@
 					</form>
 					<table id="skill_table" class="table table-hover table-sm" style="table-layout: fixed;">
 						<tbody id="sort-table">
-						<tr id="table23"><td style="width:40px;"></td><td>スキル名</td><td style="width:180px;">威力</td><td style="width:180px;">GCD</td><td style="width:40px;"></td></tr>
+						<tr id="table23"><td style="width:40px;"></td><td>スキル名</td><td style="width:120px;">Hit</td><td style="width:120px;">威力</td><td style="width:120px;">GCD</td><td style="width:120px;">威力/s</td><td style="width:40px;"></td></tr>
 						</tbody>
 					</table>
 					<p>威力：<span id="dmg">0</span> | GCD：<span id="gcd">0</span> | 威力/s：<span id="dps">0</span></p>
@@ -162,8 +162,15 @@
 						} else {
 							skill_gcd = skill_data[skil_list].gcd2;
 						}
+						if (skill_gcd == 0) {
+							skill_dps = "";
+						} else {
+							skill_dps = Math.round((enemy_dmg / skill_gcd)*1000)/1000;
+						}
 
-						$('#skill_table').append('<tr id="table' + table_num + '"><td style="width:40px;"><img src="img/' + skill_data[skil_list].img +'" style="height: 27px;"></td><td>' + skill_data[skil_list].name +'</td><td style="width:180px;" id="dmg' + table_num +'">'+ enemy_dmg +'</td><td style="width:180px;" id="gcd' + table_num +'">' + skill_gcd + '</td><td style="width:40px;"><button class="btn btn-outline-primary btn-sm" onclick="t_del(' + table_num + ');">×</button></i></td></tr>');
+						$('#skill_table').append('<tr id="table' + table_num + '"><td><img src="img/' + skill_data[skil_list].img +'" style="height: 27px;"></td><td>' + skill_data[skil_list].name
+							 +'</td><td>' + enemy + '</td><td id="dmg' + table_num +'">'+ enemy_dmg +'</td><td id="gcd' + table_num +'">' + skill_gcd 
+							 	+ '</td><td>' + skill_dps + '</td><td><button class="btn btn-outline-primary btn-sm" onclick="t_del(' + table_num + ');">×</button></i></td></tr>');
 
 						$('#dmg').html(dmg);
 
