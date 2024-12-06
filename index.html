@@ -156,7 +156,9 @@
 					function push_skilllist(skil_list) {
 						table_num += 1;
 
+
 						enemy_dmg = skill_data[skil_list].dmg + skill_data[skil_list].dmg * (enemy-1) * skill_data[skil_list].mul;
+						enemy_dmg = Math.round(enemy_dmg*1000)/1000;
 						dmg = enemy_dmg + Number($('#dmg').html());
 
 						if (gcd_mode == 1) {
@@ -174,6 +176,7 @@
 							 +'</td><td>' + enemy + '</td><td id="dmg' + table_num +'">'+ enemy_dmg +'</td><td id="gcd' + table_num +'">' + skill_gcd 
 							 	+ '</td><td>' + skill_dps + '</td><td><button class="btn btn-outline-primary btn-sm" onclick="t_del(' + table_num + ');">×</button></i></td></tr>');
 
+						dmg = Math.round(dmg*1000)/1000;
 						$('#dmg').html(dmg);
 
 						gcd = Math.round(skill_gcd*100 + Number($('#gcd').html()*100))/100;
@@ -185,6 +188,7 @@
 					
 					function t_del(del_num) {
 						dmg = Number($('#dmg').html()) - Number($('#dmg'+del_num).html())
+						dmg = Math.round(dmg*1000)/1000;
 						$('#dmg').html(dmg);
 
 						gcd = Math.round(Number($('#gcd').html())*100 - Number($('#gcd'+del_num).html())*100)/100;
